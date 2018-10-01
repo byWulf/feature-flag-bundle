@@ -1,0 +1,41 @@
+services:
+
+    Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface: '@Shopping\FeatureFlagBundle\Provider\ChainFeatureFlag'
+    Shopping\FeatureFlagBundle\Provider\ChainFeatureFlag: ~
+
+    Shopping\FeatureFlagBundle\Provider\DotEnvFeatureFlag:
+        arguments:
+            $isEnabled: ''
+        tags:
+            - { name: featureFlag.provider }
+
+    Shopping\FeatureFlagBundle\Provider\CookieFeatureFlag:
+        arguments:
+            $requestStack: '@request_stack'
+            $isEnabled: ''
+            $values: []
+        tags:
+            - { name: featureFlag.provider }
+
+    Shopping\FeatureFlagBundle\Provider\UserAgentFeatureFlag:
+        arguments:
+            $requestStack: '@request_stack'
+            $isEnabled: ''
+            $userAgents: []
+        tags:
+            - { name: featureFlag.provider }
+
+
+    Shopping\FeatureFlagBundle\EventListener\FeatureFlagAnnotationListener:
+        arguments:
+            $reader: '@annotations.reader'
+            $requestStack: '@request_stack'
+            $featureFlag: '@Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller }
+
+    Shopping\FeatureFlagBundle\Twig\FeatureFlagExtension:
+        arguments:
+            $featureFlag: '@Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface'
+        tags:
+            - { name: twig.extension }
