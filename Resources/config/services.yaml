@@ -21,7 +21,7 @@ services:
         arguments:
             $requestStack: '@request_stack'
             $isEnabled: ''
-            $userAgents: []
+            $values: []
         tags:
             - { name: featureFlag.provider }
 

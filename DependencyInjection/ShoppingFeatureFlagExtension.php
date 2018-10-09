@@ -43,6 +43,6 @@ class ShoppingFeatureFlagExtension extends Extension
 
         $definition = $container->getDefinition(UserAgentProvider::class);
         $definition->replaceArgument('$isEnabled', $config['providers']['userAgent']['enabled']);
-        $definition->replaceArgument('$userAgents', $config['providers']['userAgent']['values']);
+        $definition->replaceArgument('$values', $config['providers']['userAgent']['values']);
     }
 }

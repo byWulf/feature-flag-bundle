@@ -67,19 +67,19 @@ Use the twig function `is_active` to check if a feature is enabled:
 Create a `config/packages/shopping_feature_flag.yaml` file. Here you can configure the built in feature flag providers:
 ```yaml
 shopping_feature_flag:
-    provider:
+    providers:
         cookie:
             enabled: true
             values:
                 test1: 1234
-                test2: 5678
+                test2: [5678,9999]
         dotEnv:
             enabled: true
         userAgent:
             enabled: true
             values:
                 test: foobar/chrome
-                test2: foobar/chrome
+                test2: [foobar/chrome, foobar/firefox]
 ```
 
 You can enable/disable some of the built in providers. 

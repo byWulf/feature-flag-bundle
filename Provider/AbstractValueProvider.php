@@ -46,28 +46,7 @@ abstract class AbstractValueProvider implements FeatureFlagInterface
             return false;
         }
 
-        return $this->isValidValue($featureFlag, $this->getValue($featureFlag));
-    }
-
-    /**
-     * @param string $featureFlag
-     * @param string $value
-     * @return bool
-     */
-    private function isValidValue(string $featureFlag, string $value): bool
-    {
-        $neededValues = $this->values[$featureFlag];
-        if (!is_array($neededValues)) {
-            $neededValues = [$neededValues];
-        }
-
-        foreach ($neededValues as $neededValue) {
-            if ((string) $neededValue === $value) {
-                return true;
-            }
-        }
-
-        return false;
+        return in_array($this->getValue($featureFlag), $this->values[$featureFlag], true);
     }
 
     /**
