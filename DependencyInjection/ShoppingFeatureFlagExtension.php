@@ -34,15 +34,10 @@ class ShoppingFeatureFlagExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition(DotEnvProvider::class);
-        $definition->replaceArgument('$isEnabled', $config['providers']['dotEnv']['enabled']);
-
         $definition = $container->getDefinition(CookieProvider::class);
-        $definition->replaceArgument('$isEnabled', $config['providers']['cookie']['enabled']);
         $definition->replaceArgument('$values', $config['providers']['cookie']['values']);
 
         $definition = $container->getDefinition(UserAgentProvider::class);
-        $definition->replaceArgument('$isEnabled', $config['providers']['userAgent']['enabled']);
         $definition->replaceArgument('$values', $config['providers']['userAgent']['values']);
     }
 }

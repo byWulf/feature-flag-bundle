@@ -10,29 +10,12 @@ namespace Shopping\FeatureFlagBundle\Provider;
 class DotEnvProvider implements FeatureFlagInterface
 {
     /**
-     * @var bool
-     */
-    private $isEnabled;
-
-    /**
-     * @param bool $isEnabled
-     */
-    public function __construct(bool $isEnabled)
-    {
-        $this->isEnabled = $isEnabled;
-    }
-
-    /**
      * @param string $featureFlag
      *
      * @return bool
      */
     public function isActive(string $featureFlag): bool
     {
-        if (!$this->isEnabled) {
-            return false;
-        }
-
         return (bool) getenv($this->buildEnvName($featureFlag));
     }
 

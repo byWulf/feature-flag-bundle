@@ -18,14 +18,13 @@ class UserAgentProvider extends AbstractValueProvider
 
     /**
      * @param RequestStack $requestStack
-     * @param bool         $isEnabled
      * @param array        $values
      */
-    public function __construct(RequestStack $requestStack, bool $isEnabled, array $values)
+    public function __construct(RequestStack $requestStack, array $values)
     {
         $this->requestStack = $requestStack;
 
-        parent::__construct($isEnabled, $values);
+        parent::__construct($values);
     }
 
     /**

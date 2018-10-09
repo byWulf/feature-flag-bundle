@@ -9,23 +9,16 @@ namespace Shopping\FeatureFlagBundle\Provider;
  */
 abstract class AbstractValueProvider implements FeatureFlagInterface
 {
-
-    /**
-     * @var bool
-     */
-    private $isEnabled;
     /**
      * @var array|string[]
      */
     private $values;
 
     /**
-     * @param bool  $isEnabled
      * @param array $values
      */
-    public function __construct(bool $isEnabled, array $values)
+    public function __construct(array $values)
     {
-        $this->isEnabled = $isEnabled;
         $this->values = $values;
     }
 
@@ -38,10 +31,6 @@ abstract class AbstractValueProvider implements FeatureFlagInterface
      */
     public function isActive(string $featureFlag): bool
     {
-        if (!$this->isEnabled) {
-            return false;
-        }
-
         if (!isset($this->values[$featureFlag])) {
             return false;
         }

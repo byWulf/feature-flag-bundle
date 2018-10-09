@@ -4,15 +4,12 @@ services:
     Shopping\FeatureFlagBundle\Provider\ChainProvider: ~
 
     Shopping\FeatureFlagBundle\Provider\DotEnvProvider:
-        arguments:
-            $isEnabled: ''
         tags:
             - { name: featureFlag.provider }
 
     Shopping\FeatureFlagBundle\Provider\CookieProvider:
         arguments:
             $requestStack: '@request_stack'
-            $isEnabled: ''
             $values: []
         tags:
             - { name: featureFlag.provider }
@@ -20,7 +17,6 @@ services:
     Shopping\FeatureFlagBundle\Provider\UserAgentProvider:
         arguments:
             $requestStack: '@request_stack'
-            $isEnabled: ''
             $values: []
         tags:
             - { name: featureFlag.provider }
