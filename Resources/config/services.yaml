@@ -1,15 +1,15 @@
 services:
 
-    Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface: '@Shopping\FeatureFlagBundle\Provider\ChainFeatureFlag'
-    Shopping\FeatureFlagBundle\Provider\ChainFeatureFlag: ~
+    Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface: '@Shopping\FeatureFlagBundle\Provider\ChainProvider'
+    Shopping\FeatureFlagBundle\Provider\ChainProvider: ~
 
-    Shopping\FeatureFlagBundle\Provider\DotEnvFeatureFlag:
+    Shopping\FeatureFlagBundle\Provider\DotEnvProvider:
         arguments:
             $isEnabled: ''
         tags:
             - { name: featureFlag.provider }
 
-    Shopping\FeatureFlagBundle\Provider\CookieFeatureFlag:
+    Shopping\FeatureFlagBundle\Provider\CookieProvider:
         arguments:
             $requestStack: '@request_stack'
             $isEnabled: ''
@@ -17,7 +17,7 @@ services:
         tags:
             - { name: featureFlag.provider }
 
-    Shopping\FeatureFlagBundle\Provider\UserAgentFeatureFlag:
+    Shopping\FeatureFlagBundle\Provider\UserAgentProvider:
         arguments:
             $requestStack: '@request_stack'
             $isEnabled: ''

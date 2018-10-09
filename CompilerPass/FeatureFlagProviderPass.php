@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\CompilerPass;
 
-use Shopping\FeatureFlagBundle\Provider\ChainFeatureFlag;
+use Shopping\FeatureFlagBundle\Provider\ChainProvider;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -20,11 +20,11 @@ class FeatureFlagProviderPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(ChainFeatureFlag::class)) {
+        if (!$container->has(ChainProvider::class)) {
             return;
         }
 
-        $definition = $container->findDefinition(ChainFeatureFlag::class);
+        $definition = $container->findDefinition(ChainProvider::class);
 
         $taggedServices = $container->findTaggedServiceIds('featureFlag.provider');
         foreach ($taggedServices as $id => $tags) {

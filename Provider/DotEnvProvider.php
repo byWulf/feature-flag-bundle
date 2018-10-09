@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Shopping\FeatureFlagBundle\Provider;
 
 /**
- * Class DotEnvFeatureFlag.
+ * Class DotEnvProvider.
  */
-class DotEnvFeatureFlag implements FeatureFlagInterface
+class DotEnvProvider implements FeatureFlagInterface
 {
     /**
      * @var bool

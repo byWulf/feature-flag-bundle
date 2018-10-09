@@ -7,9 +7,9 @@ namespace Shopping\FeatureFlagBundle\Provider;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class UserAgentFeatureFlag.
+ * Class UserAgentProvider.
  */
-class UserAgentFeatureFlag implements FeatureFlagInterface
+class UserAgentProvider implements FeatureFlagInterface
 {
     /**
      * @var RequestStack

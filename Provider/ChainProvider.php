@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Shopping\FeatureFlagBundle\Provider;
 
 /**
- * Class ChainFeatureFlag.
+ * Class ChainProvider.
  */
-class ChainFeatureFlag implements FeatureFlagInterface
+class ChainProvider implements FeatureFlagInterface
 {
     /**
      * @var FeatureFlagInterface[]

@@ -7,9 +7,9 @@ namespace Shopping\FeatureFlagBundle\Provider;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * Class CookieFeatureFlag.
+ * Class CookieProvider.
  */
-class CookieFeatureFlag implements FeatureFlagInterface
+class CookieProvider implements FeatureFlagInterface
 {
     /**
      * @var RequestStack

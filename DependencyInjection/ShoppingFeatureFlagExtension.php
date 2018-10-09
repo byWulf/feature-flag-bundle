@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\DependencyInjection;
 
-use Shopping\FeatureFlagBundle\Provider\CookieFeatureFlag;
-use Shopping\FeatureFlagBundle\Provider\DotEnvFeatureFlag;
-use Shopping\FeatureFlagBundle\Provider\UserAgentFeatureFlag;
+use Shopping\FeatureFlagBundle\Provider\CookieProvider;
+use Shopping\FeatureFlagBundle\Provider\DotEnvProvider;
+use Shopping\FeatureFlagBundle\Provider\UserAgentProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
@@ -34,14 +34,14 @@ class ShoppingFeatureFlagExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition(DotEnvFeatureFlag::class);
+        $definition = $container->getDefinition(DotEnvProvider::class);
         $definition->replaceArgument('$isEnabled', $config['providers']['dotEnv']['enabled']);
 
-        $definition = $container->getDefinition(CookieFeatureFlag::class);
+        $definition = $container->getDefinition(CookieProvider::class);
         $definition->replaceArgument('$isEnabled', $config['providers']['cookie']['enabled']);
         $definition->replaceArgument('$values', $config['providers']['cookie']['values']);
 
-        $definition = $container->getDefinition(UserAgentFeatureFlag::class);
+        $definition = $container->getDefinition(UserAgentProvider::class);
         $definition->replaceArgument('$isEnabled', $config['providers']['userAgent']['enabled']);
         $definition->replaceArgument('$userAgents', $config['providers']['userAgent']['values']);
     }
