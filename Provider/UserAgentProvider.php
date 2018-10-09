@@ -9,50 +9,33 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Class UserAgentProvider.
  */
-class UserAgentProvider implements FeatureFlagInterface
+class UserAgentProvider extends AbstractValueProvider
 {
     /**
      * @var RequestStack
      */
     private $requestStack;
-    /**
-     * @var bool
-     */
-    private $isEnabled;
-    /**
-     * @var array|string[]
-     */
-    private $userAgents;
 
     /**
      * @param RequestStack $requestStack
      * @param bool         $isEnabled
-     * @param string[]     $userAgents
+     * @param array        $values
      */
-    public function __construct(RequestStack $requestStack, bool $isEnabled, array $userAgents)
+    public function __construct(RequestStack $requestStack, bool $isEnabled, array $values)
     {
         $this->requestStack = $requestStack;
-        $this->isEnabled = $isEnabled;
-        $this->userAgents = $userAgents;
+
+        parent::__construct($isEnabled, $values);
     }
 
     /**
-     * @param string $featureFlag
+     * Returns the value given by the user.
      *
-     * @return bool
+     * @param string $featureFlag
+     * @return string
      */
-    public function isActive(string $featureFlag): bool
+    protected function getValue(string $featureFlag): string
     {
-        if (!$this->isEnabled) {
-            return false;
-        }
-
-        if (!isset($this->userAgents[$featureFlag])) {
-            return false;
-        }
-
-        $userAgent = $this->requestStack->getCurrentRequest()->headers->get('User-Agent');
-
-        return (string) $this->userAgents[$featureFlag] === $userAgent;
+        return $this->requestStack->getCurrentRequest()->headers->get('User-Agent');
     }
 }

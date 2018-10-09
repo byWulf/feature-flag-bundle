@@ -9,20 +9,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 /**
  * Class CookieProvider.
  */
-class CookieProvider implements FeatureFlagInterface
+class CookieProvider extends AbstractValueProvider
 {
     /**
      * @var RequestStack
      */
     private $requestStack;
-    /**
-     * @var bool
-     */
-    private $isEnabled;
-    /**
-     * @var array|string[]
-     */
-    private $values;
 
     /**
      * @param RequestStack $requestStack
@@ -32,37 +24,16 @@ class CookieProvider implements FeatureFlagInterface
     public function __construct(RequestStack $requestStack, bool $isEnabled, array $values)
     {
         $this->requestStack = $requestStack;
-        $this->isEnabled = $isEnabled;
-        $this->values = $values;
+
+        parent::__construct($isEnabled, $values);
     }
 
     /**
      * @param string $featureFlag
-     *
-     * @return bool
-     */
-    public function isActive(string $featureFlag): bool
-    {
-        if (!$this->isEnabled) {
-            return false;
-        }
-
-        $value = $this->requestStack->getCurrentRequest()->cookies->get($this->buildCookieName($featureFlag));
-
-        if (isset($this->values[$featureFlag])) {
-            return (string) $this->values[$featureFlag] === $value;
-        }
-
-        return (bool) $value;
-    }
-
-    /**
-     * @param string $featureFlag
-     *
      * @return string
      */
-    private function buildCookieName(string $featureFlag): string
+    protected function getValue(string $featureFlag): string
     {
-        return 'featureFlag_' . $featureFlag;
+        return (string) $this->requestStack->getCurrentRequest()->cookies->get('featureFlag_' . $featureFlag);
     }
 }
