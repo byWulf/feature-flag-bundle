@@ -12,7 +12,7 @@ abstract class AbstractValueProvider implements FeatureFlagInterface
     /**
      * @var array|string[]
      */
-    private $values;
+    protected $values;
 
     /**
      * @param array $values

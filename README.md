@@ -102,7 +102,7 @@ If you haven't specified a specific value in the config for the feature flag, an
 #### User-Agent
 Activate a feature only for yourself by setting a custom User-Agent in your browser (f.e. with the Chrome plugin "User-Agent Switcher").
 
-Configure in the `shopping_feature_flag.yaml`, what User-Agent activates what feature:
+Configure in the `shopping_feature_flag.yaml`, what parts of the User-Agent activates what feature:
 ```yaml
 shopping_feature_flag:
     providers:
@@ -110,7 +110,7 @@ shopping_feature_flag:
             values:
                 foobar: foobar/chrome
 ```
--> When using the User-Agent `foobar/chrome`, the Feature "foobar" is active.
+-> When using a User-Agent containing the string `foobar/chrome`, the Feature "foobar" is active. This way it is possible to activate multiple features with one User-Agent, which contains all needed keys for the features while preserving the browser/device detection of the website. 
 
 ### Create own provider
 If you want to activate features in a custom way, you want to write your own provider.

@@ -28,6 +28,28 @@ class UserAgentProvider extends AbstractValueProvider
     }
 
     /**
+     * Returns true, if this FeatureFlag is set and active.
+     *
+     * @param string $featureFlag
+     *
+     * @return bool
+     */
+    public function isActive(string $featureFlag): bool
+    {
+        if (!isset($this->values[$featureFlag])) {
+            return false;
+        }
+
+        foreach ($this->values[$featureFlag] as $neededValue) {
+            if (strpos($this->getValue($featureFlag), $neededValue) !== false) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Returns the value given by the user.
      *
      * @param string $featureFlag
