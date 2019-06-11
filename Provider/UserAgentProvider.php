@@ -57,6 +57,6 @@ class UserAgentProvider extends AbstractValueProvider
      */
     protected function getValue(string $featureFlag): string
     {
-        return $this->requestStack->getCurrentRequest()->headers->get('User-Agent');
+        return (string) $this->requestStack->getCurrentRequest()->headers->get('User-Agent');
     }
 }
