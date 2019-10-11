@@ -2,10 +2,21 @@
 Easily toggle features in your Symfony app. Built-in providers are .env, cookies and userAgent. But you can extend the system with own providers (f.e. for A/B testing).
 
 ## Install
-Install the package via composer (TODO: NOT YET):
+Install the package via composer:
 ```
-composer install check24/feature-flag-bundle
+composer require check24/feature-flag-bundle
 ```
+
+Create a `config/packages/shopping_feature_flag.yaml` file with basic configuration:
+```yaml
+shopping_feature_flag:
+    providers:
+        cookie:
+            values: []
+        userAgent:
+            values: []
+```
+More about the possible configurations later.
 
 ## Usage
 
@@ -64,7 +75,7 @@ Use the twig function `is_active` to check if a feature is enabled:
 
 ### Configuring feature flag providers
 
-Create a `config/packages/shopping_feature_flag.yaml` file. Here you can configure the built in feature flag providers:
+In your `config/packages/shopping_feature_flag.yaml` configuration, you can configure the built-in providers to define, which feature flag (key) should be active, when the user inputs on of the values:
 ```yaml
 shopping_feature_flag:
     providers:
