@@ -33,6 +33,10 @@ class CookieProvider extends AbstractValueProvider
      */
     protected function getValue(string $featureFlag): string
     {
+        if ($this->requestStack->getCurrentRequest() === null) {
+            return '';
+        }
+
         return (string) $this->requestStack->getCurrentRequest()->cookies->get('featureFlag_' . $featureFlag);
     }
 }
