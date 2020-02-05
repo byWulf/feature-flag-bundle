@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\EventListener;
 
+use Doctrine\Common\Annotations\Reader;
 use Shopping\FeatureFlagBundle\Annotation\IsActive;
 use Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface;
-use Doctrine\Common\Annotations\Reader;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 /**
@@ -17,44 +16,41 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class FeatureFlagAnnotationListener
 {
-    /**
-     * @var RequestStack
-     */
-    private $requestStack;
 
     /**
      * @var Reader
      */
     private $reader;
+
     /**
      * @var FeatureFlagInterface
      */
     private $featureFlag;
 
     /**
-     * AllowedFilterAnnotationListener constructor.
+     * FeatureFlagAnnotationListener constructor.
      *
      * @param Reader               $reader
-     * @param RequestStack         $requestStack
      * @param FeatureFlagInterface $featureFlag
      */
-    public function __construct(Reader $reader, RequestStack $requestStack, FeatureFlagInterface $featureFlag)
+    public function __construct(Reader $reader, FeatureFlagInterface $featureFlag)
     {
-        $this->requestStack = $requestStack;
         $this->reader = $reader;
         $this->featureFlag = $featureFlag;
     }
 
     /**
-     * @param FilterControllerEvent $event
+     * @param ControllerEvent $event
+     *
+     * @throws \ReflectionException
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event): void
     {
         if (!is_array($event->getController())) {
             return;
         }
 
-        /** @var Controller $controllerObject */
+        /** @var AbstractController $controllerObject */
         list($controllerObject, $methodName) = $event->getController();
 
         $controllerReflectionObject = new \ReflectionObject($controllerObject);

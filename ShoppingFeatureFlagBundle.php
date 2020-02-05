@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle;
@@ -8,11 +9,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class ShoppingFeatureFlagBundle
+ * Class ShoppingFeatureFlagBundle.
  */
 class ShoppingFeatureFlagBundle extends Bundle
 {
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 

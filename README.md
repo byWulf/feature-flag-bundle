@@ -7,17 +7,6 @@ Install the package via composer:
 composer require check24/feature-flag-bundle
 ```
 
-Create a `config/packages/shopping_feature_flag.yaml` file with basic configuration:
-```yaml
-shopping_feature_flag:
-    providers:
-        cookie:
-            values: []
-        userAgent:
-            values: []
-```
-More about the possible configurations later.
-
 ## Usage
 
 ### Accessing feature flag states
@@ -51,13 +40,13 @@ class SomeService
     {
         $this->featureFlag = $featureFlag;
     }
-    
-    public function getNumber(): int 
+
+    public function getNumber(): int
     {
         if ($this->featureFlag->isActive('foobar')) {
             return 2;
         }
-        
+
         return 1;
     }
 }
@@ -89,7 +78,7 @@ shopping_feature_flag:
                 test2: [foobar/chrome, foobar/firefox]
 ```
 
-You can enable/disable some of the built in providers. 
+You can enable/disable some of the built in providers.
 
 ### Toggling features
 Feature flags can be toggled by the configured providers. If at least one of the providers reports the feature as active, it is active.
@@ -121,14 +110,14 @@ shopping_feature_flag:
             values:
                 foobar: foobar/chrome
 ```
--> When using a User-Agent containing the string `foobar/chrome`, the Feature "foobar" is active. This way it is possible to activate multiple features with one User-Agent, which contains all needed keys for the features while preserving the browser/device detection of the website. 
+-> When using a User-Agent containing the string `foobar/chrome`, the Feature "foobar" is active. This way it is possible to activate multiple features with one User-Agent, which contains all needed keys for the features while preserving the browser/device detection of the website.
 
 ### Create own provider
 If you want to activate features in a custom way, you want to write your own provider.
 
 In this example we create a time-based provider, so the specific feature "morningShow" is only activated between 8 and 10 a.m. .
 
-First create a provider class, implement the `FeatureFlagInterface` with the `isActive()` method. This method should return true if the given feature is active. Otherwise return false. 
+First create a provider class, implement the `FeatureFlagInterface` with the `isActive()` method. This method should return true if the given feature is active. Otherwise return false.
 ```php
 //src/FeatureFlagProvider/MorningProvider.php
 
@@ -146,7 +135,7 @@ class MorningProvider implements FeatureFlagInterface
         if ($featureFlag !== 'morningShow') {
             return false;
         }
-    
+
         $hour = (new \DateTime())->format('G');
 
         return $hour >= 8 && $hour <= 10;

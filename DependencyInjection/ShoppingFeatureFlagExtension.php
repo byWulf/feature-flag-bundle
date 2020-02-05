@@ -1,10 +1,10 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\DependencyInjection;
 
 use Shopping\FeatureFlagBundle\Provider\CookieProvider;
-use Shopping\FeatureFlagBundle\Provider\DotEnvProvider;
 use Shopping\FeatureFlagBundle\Provider\UserAgentProvider;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -12,11 +12,10 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Class ShoppingFeatureFlagExtension
+ * Class ShoppingFeatureFlagExtension.
  */
 class ShoppingFeatureFlagExtension extends Extension
 {
-
     /**
      * Loads a specific configuration.
      *
@@ -26,7 +25,7 @@ class ShoppingFeatureFlagExtension extends Extension
      * @throws \InvalidArgumentException When provided tag is not defined in this extension
      * @throws \Exception
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yaml');

@@ -18,7 +18,7 @@ class UserAgentProvider extends AbstractValueProvider
 
     /**
      * @param RequestStack $requestStack
-     * @param array        $values
+     * @param string[][]        $values
      */
     public function __construct(RequestStack $requestStack, array $values)
     {
@@ -53,6 +53,7 @@ class UserAgentProvider extends AbstractValueProvider
      * Returns the value given by the user.
      *
      * @param string $featureFlag
+     *
      * @return string
      */
     protected function getValue(string $featureFlag): string

@@ -25,7 +25,6 @@ services:
     Shopping\FeatureFlagBundle\EventListener\FeatureFlagAnnotationListener:
         arguments:
             $reader: '@annotations.reader'
-            $requestStack: '@request_stack'
             $featureFlag: '@Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface'
         tags:
             - { name: kernel.event_listener, event: kernel.controller }

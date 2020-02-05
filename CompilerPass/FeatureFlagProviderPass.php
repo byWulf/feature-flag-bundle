@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\CompilerPass;
@@ -9,16 +10,16 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class FeatureFlagProviderPass
+ * Class FeatureFlagProviderPass.
  */
 class FeatureFlagProviderPass implements CompilerPassInterface
 {
-
     /**
      * You can modify the container here before it is dumped to PHP code.
+     *
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (!$container->has(ChainProvider::class)) {
             return;
