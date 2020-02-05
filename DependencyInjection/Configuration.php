@@ -19,8 +19,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('shopping_feature_flag');
+        $treeBuilder = new TreeBuilder('shopping_feature_flag');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->children()
