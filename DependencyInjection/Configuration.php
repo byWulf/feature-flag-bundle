@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\DependencyInjection;
@@ -7,11 +8,10 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * Class Configuration
+ * Class Configuration.
  */
 class Configuration implements ConfigurationInterface
 {
-
     /**
      * Generates the configuration tree builder.
      *
@@ -25,16 +25,19 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('providers')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('cookie')
+                            ->addDefaultsIfNotSet()
                             ->children()
                                 ->arrayNode('values')
+                                    ->defaultValue([])
                                     ->useAttributeAsKey('featureFlag')
                                     ->arrayPrototype()
                                         ->isRequired()
                                         ->beforeNormalization()->castToArray()->end()
                                         ->scalarPrototype()
-                                            ->beforeNormalization()->always(function($value) { return (string) $value; })->end()
+                                            ->beforeNormalization()->always(function ($value) { return (string) $value; })->end()
                                             ->cannotBeEmpty()
                                         ->end()
                                     ->end()
@@ -42,14 +45,16 @@ class Configuration implements ConfigurationInterface
                             ->end()
                         ->end()
                         ->arrayNode('userAgent')
+                            ->addDefaultsIfNotSet()
                             ->children()
                                 ->arrayNode('values')
+                                    ->defaultValue([])
                                     ->useAttributeAsKey('featureFlag')
                                     ->arrayPrototype()
                                         ->isRequired()
                                         ->beforeNormalization()->castToArray()->end()
                                         ->scalarPrototype()
-                                            ->beforeNormalization()->always(function($value) { return (string) $value; })->end()
+                                            ->beforeNormalization()->always(function ($value) { return (string) $value; })->end()
                                             ->cannotBeEmpty()
                                         ->end()
                                     ->end()

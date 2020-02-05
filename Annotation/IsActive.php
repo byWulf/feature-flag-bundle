@@ -19,7 +19,8 @@ class IsActive
     /**
      * IsActive constructor.
      *
-     * @param array $values
+     * @param string[] $values
+     * @phpstan-param array{value: string} $values
      */
     public function __construct(array $values)
     {

@@ -25,9 +25,9 @@ class FeatureFlagExtension extends AbstractExtension
     }
 
     /**
-     * @return array|\Twig_Function[]
+     * @return TwigFunction[]
      */
-    public function getFunctions()
+    public function getFunctions(): array
     {
         return [
             new TwigFunction('is_active', [$this, 'isActiveFeatureFlag']),

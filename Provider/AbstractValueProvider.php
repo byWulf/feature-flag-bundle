@@ -1,21 +1,23 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Shopping\FeatureFlagBundle\Provider;
 
 /**
- * Class AbstractValueProvider
+ * Class AbstractValueProvider.
+ *
  * @package Shopping\FeatureFlagBundle\Provider
  */
 abstract class AbstractValueProvider implements FeatureFlagInterface
 {
     /**
-     * @var array|string[]
+     * @var string[][]
      */
     protected $values;
 
     /**
-     * @param array $values
+     * @param string[][] $values
      */
     public function __construct(array $values)
     {
@@ -42,6 +44,7 @@ abstract class AbstractValueProvider implements FeatureFlagInterface
      * Returns the value given by the user.
      *
      * @param string $featureFlag
+     *
      * @return string
      */
     abstract protected function getValue(string $featureFlag): string;
