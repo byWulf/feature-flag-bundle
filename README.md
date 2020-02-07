@@ -146,7 +146,7 @@ Remember: A feature is active if any provider reports it as being active, so ret
 
 Next, tag the service with the `featureFlag.provider` tag:
 ```yaml
-#config/services.yaml
+# config/services.yaml
 
 services:
     App\FeatureFlagProvider\MorningProvider:
@@ -157,3 +157,31 @@ services:
 And you are done. The feature "morningShow" will now always be active between 8 and 10 a.m.
 
 You can use this feature to realise an A/B testing, so you activate the feature only for a specific group of users.
+
+### Env Var Processor
+
+To use a feature flag's value within a bundle's configuration you may use the `feature_flag`
+env var processor. This is especially useful when used in conjunction with custom feature
+flag providers, f.e. when you're loading flags from a database via doctrine.
+
+```yaml
+# config/packages/example_foo_bundle.yaml
+example_foo_bundle:
+    enable_baz: '%env(feature_flag:foo_bar)%'
+```
+
+The above snippet will set the `enable_baz` config of ExampleBundle to the value of 
+a feature flag called `foo_bar`.
+You can use the same technique when you'd like to register a specific feature flag as
+container parameter:
+
+```yaml
+# config/services.yaml
+
+parameters:
+    maintenance_mode: '%env(feature_flag:maintenance_mode)%'
+```
+
+`$container->getParameter('maintenance_mode')` will now contain either true or false, 
+depending on whether the feature flag is active or not.
+

@@ -16,7 +16,6 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  */
 class FeatureFlagAnnotationListener
 {
-
     /**
      * @var Reader
      */
