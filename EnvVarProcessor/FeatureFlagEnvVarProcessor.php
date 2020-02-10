@@ -33,7 +33,7 @@ class FeatureFlagEnvVarProcessor implements EnvVarProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function getEnv(string $prefix, string $name, Closure $getEnv)
+    public function getEnv(/*string */$prefix, /*string */$name, Closure $getEnv)
     {
         return $this->featureFlag->isActive($name);
     }
