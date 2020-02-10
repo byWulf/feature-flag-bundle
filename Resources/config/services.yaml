@@ -1,5 +1,4 @@
 services:
-
     Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface: '@Shopping\FeatureFlagBundle\Provider\ChainProvider'
     Shopping\FeatureFlagBundle\Provider\ChainProvider: ~
 
@@ -34,3 +33,9 @@ services:
             $featureFlag: '@Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface'
         tags:
             - { name: twig.extension }
+
+    Shopping\FeatureFlagBundle\EnvVarProcessor\FeatureFlagEnvVarProcessor:
+        arguments:
+            $featureFlag: '@Shopping\FeatureFlagBundle\Provider\FeatureFlagInterface'
+        tags:
+            - { name: container.env_var_processor }
