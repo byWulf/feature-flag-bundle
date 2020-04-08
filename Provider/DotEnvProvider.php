@@ -16,7 +16,11 @@ class DotEnvProvider implements FeatureFlagInterface
      */
     public function isActive(string $featureFlag): bool
     {
-        return (bool) getenv($this->buildEnvName($featureFlag));
+        $dotEnvName = $this->buildEnvName($featureFlag);
+        $getEnv = (bool) getenv($dotEnvName);
+        $dotEnv = !empty($_ENV[$dotEnvName]) ? (bool) $_ENV[$dotEnvName] : false;
+
+        return $getEnv || $dotEnv;
     }
 
     /**
