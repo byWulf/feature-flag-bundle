@@ -1,6 +1,6 @@
 {
   "name": "check24/feature-flag-bundle",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "license": "MIT",
   "type": "symfony-bundle",
   "description": "Toggleable feature flags for your symfony application with various sources like .env, cookie, etc.",
